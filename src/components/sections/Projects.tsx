@@ -2,71 +2,12 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import ScrollDownButton from '../common/ScrollDownButton';
+import { useContent } from '../../context/ContentContext';
+import { optimizeImage, generateSrcSet } from '../../utils/imageOptimizer';
 
 const Projects = () => {
-  // Project data - in a real application, this would come from a data file or API
-  const allProjects = [
-    {
-      id: 1,
-      title: 'Enterprise Security Assessment',
-      description: 'Comprehensive security assessment and penetration testing for a large enterprise, including vulnerability analysis and remediation recommendations.',
-      image: 'https://placehold.co/600x400/eee/333?text=Security+Assessment',
-      category: 'security',
-      tags: ['VAPT', 'ISO 27001', 'Security+'],
-      githubLink: 'https://github.com',
-      liveLink: 'https://example.com'
-    },
-    {
-      id: 2,
-      title: 'Infrastructure Modernization',
-      description: 'End-to-end infrastructure upgrade project including server deployment, backup solutions, and security hardening.',
-      image: 'https://placehold.co/600x400/eee/333?text=Infrastructure+Project',
-      category: 'infrastructure',
-      tags: ['Servers', 'Backup Systems', 'Security'],
-      githubLink: 'https://github.com',
-      liveLink: 'https://example.com'
-    },
-    {
-      id: 3,
-      title: 'Security Operations Center',
-      description: 'Design and implementation of a SOC with integrated monitoring, incident response, and threat detection capabilities.',
-      image: 'https://placehold.co/600x400/eee/333?text=SOC+Implementation',
-      category: 'security',
-      tags: ['SIEM', 'Incident Response', 'Monitoring'],
-      githubLink: 'https://github.com',
-      liveLink: 'https://example.com'
-    },
-    {
-      id: 4,
-      title: 'Disaster Recovery Solution',
-      description: 'Implementation of comprehensive disaster recovery and business continuity solution for critical systems.',
-      image: 'https://placehold.co/600x400/eee/333?text=DR+Solution',
-      category: 'infrastructure',
-      tags: ['DR', 'Backup', 'High Availability'],
-      githubLink: 'https://github.com',
-      liveLink: 'https://example.com'
-    },
-    {
-      id: 5,
-      title: 'ISO 27001 Compliance',
-      description: 'Led organization through ISO 27001 certification process, including gap analysis, implementation, and audit preparation.',
-      image: 'https://placehold.co/600x400/eee/333?text=ISO+27001',
-      category: 'security',
-      tags: ['ISO 27001', 'Compliance', 'Audit'],
-      githubLink: 'https://github.com',
-      liveLink: 'https://example.com'
-    },
-    {
-      id: 6,
-      title: 'Network Security Overhaul',
-      description: 'Complete network security redesign including segmentation, firewall implementation, and security monitoring.',
-      image: 'https://placehold.co/600x400/eee/333?text=Network+Security',
-      category: 'infrastructure',
-      tags: ['Network Security', 'Firewalls', 'Monitoring'],
-      githubLink: 'https://github.com',
-      liveLink: 'https://example.com'
-    }
-  ];
+  const { content } = useContent();
+  const allProjects = content.projects;
 
   // Filter categories
   const categories = [
@@ -157,8 +98,11 @@ const Projects = () => {
             >
               <div className="relative overflow-hidden h-48">
                 <img 
-                  src={project.image} 
+                  src={optimizeImage(project.image, { width: 600, height: 400, quality: 80 })}
+                  srcSet={generateSrcSet(project.image, [300, 600, 900])}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt={project.title} 
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
               </div>

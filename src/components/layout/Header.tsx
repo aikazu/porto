@@ -14,14 +14,31 @@ const Header = () => {
 
   // Toggle dark mode
   const toggleDarkMode = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove('dark');
-      localStorage.theme = 'light';
-    } else {
+    const newDarkModeState = !isDarkMode;
+    
+    // Update DOM
+    if (newDarkModeState) {
       document.documentElement.classList.add('dark');
-      localStorage.theme = 'dark';
+    } else {
+      document.documentElement.classList.remove('dark');
     }
-    setIsDarkMode(!isDarkMode);
+    
+    // Update localStorage for the theme
+    localStorage.theme = newDarkModeState ? 'dark' : 'light';
+    
+    // Also update the settings if they exist
+    try {
+      const savedSettings = localStorage.getItem('siteSettings');
+      if (savedSettings) {
+        const settings = JSON.parse(savedSettings);
+        settings.enableDarkMode = newDarkModeState;
+        localStorage.setItem('siteSettings', JSON.stringify(settings));
+      }
+    } catch (err) {
+      console.error('Failed to update site settings:', err);
+    }
+    
+    setIsDarkMode(newDarkModeState);
   };
 
   // Handle scroll event

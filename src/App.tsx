@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import Header from './components/layout/Header'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
@@ -7,20 +6,13 @@ import Skills from './components/sections/Skills'
 import Experience from './components/sections/Experience'
 import Contact from './components/sections/Contact'
 import Footer from './components/layout/Footer'
+import SEOHead from './components/common/SEOHead'
 import './App.css'
 
 function App() {
-  // Detect user's preferred color scheme
-  useEffect(() => {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [])
-
   return (
     <div className="min-h-screen flex flex-col">
+      <SEOHead />
       <Header />
       <main className="flex-grow">
         <Hero />

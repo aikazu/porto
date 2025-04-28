@@ -8,17 +8,17 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          50: 'hsl(var(--color-primary-50, 204deg 100% 97%))',
+          100: 'hsl(var(--color-primary-100, 204deg 100% 94%))',
+          200: 'hsl(var(--color-primary-200, 203deg 100% 86%))',
+          300: 'hsl(var(--color-primary-300, 198deg 93% 74%))',
+          400: 'hsl(var(--color-primary-400, 199deg 95% 59%))',
+          500: 'hsl(var(--color-primary-500, 199deg 89% 48%))',
+          600: 'var(--color-primary-600, #0284c7)',
+          700: 'var(--color-primary-700, #0369a1)',
+          800: 'hsl(var(--color-primary-800, 201deg 90% 27%))',
+          900: 'hsl(var(--color-primary-900, 202deg 80% 24%))',
+          950: 'hsl(var(--color-primary-950, 204deg 80% 16%))',
         },
         secondary: {
           50: '#f5f3ff',

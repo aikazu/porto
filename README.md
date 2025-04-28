@@ -7,6 +7,8 @@ A modern, responsive portfolio website showcasing my work as an IT Solution Arch
 - **Responsive Design**: Fully responsive layout that works on all devices
 - **Dark/Light Mode**: Automatic theme switching based on system preferences
 - **Smooth Animations**: Engaging animations using Framer Motion
+- **Customizable Settings**: Site-wide settings with persistent configuration
+- **Content Management**: Built-in admin panel for updating content
 - **Interactive Sections**:
   - About Me with service highlights
   - Skills categorization with visual representation
@@ -18,9 +20,10 @@ A modern, responsive portfolio website showcasing my work as an IT Solution Arch
 
 ## 🛠️ Built With
 
-- **Frontend Framework**: React 18 with TypeScript
+- **Frontend Framework**: React 19 with TypeScript
 - **Styling**: TailwindCSS for utility-first styling
 - **Build Tool**: Vite for fast development and building
+- **State Management**: Context API with specialized providers
 - **Animation**: Framer Motion for smooth transitions
 - **Icons**: React Icons
 - **Form Handling**: React Hook Form

@@ -1,8 +1,13 @@
 import { motion } from 'framer-motion';
 import { FaArrowDown } from 'react-icons/fa';
 import ScrollDownButton from '../common/ScrollDownButton';
+import { useContent } from '../../context/ContentContext';
+import { optimizeImage, generateSrcSet } from '../../utils/imageOptimizer';
 
 const Hero = () => {
+  const { content } = useContent();
+  const { hero } = content;
+  
   return (
     <section id="home" className="min-h-screen flex flex-col justify-center relative overflow-hidden">
       {/* Background gradient */}
@@ -32,7 +37,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              Iqbal Attila
+              {hero.title}
             </motion.h1>
             
             <motion.h2 
@@ -41,7 +46,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <span className="text-primary-600 dark:text-primary-400">IT Solution Architect & Cybersecurity Specialist</span> passionate about creating impactful applications
+              <span className="text-primary-600 dark:text-primary-400">{hero.subtitle}</span> passionate about creating impactful applications
             </motion.h2>
             
             <motion.p 
@@ -50,10 +55,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              I specialize in designing and implementing robust IT solutions with a focus on cybersecurity, 
-              infrastructure optimization, and enterprise security architecture.
-              I design and develop modern web applications with a focus on user experience, 
-              performance, and clean code practices.
+              {hero.description}
             </motion.p>
             
             <motion.div 
@@ -62,8 +64,8 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
             >
-              <a href="#projects" className="btn btn-primary">
-                View My Work
+              <a href={hero.ctaLink} className="btn btn-primary">
+                {hero.ctaText}
               </a>
               <a href="#contact" className="btn btn-outline">
                 Contact Me
@@ -80,9 +82,14 @@ const Hero = () => {
           >
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl">
               <img 
-                src="https://via.placeholder.com/400x400?text=Iqbal+Attila" 
-                alt="Iqbal Attila" 
+                src={optimizeImage(hero.profileImage || "https://placehold.co/400x400/eee/333?text=Profile+Image", { width: 320, height: 320, quality: 90 })}
+                srcSet={generateSrcSet(hero.profileImage || "https://placehold.co/400x400/eee/333?text=Profile+Image", [160, 320, 480])}
+                sizes="(max-width: 640px) 256px, 320px"
+                alt={hero.title} 
                 className="w-full h-full object-cover"
+                loading="eager"
+                width={320}
+                height={320}
               />
             </div>
           </motion.div>
